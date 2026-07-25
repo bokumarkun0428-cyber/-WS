@@ -16,6 +16,7 @@
   --green:    #27ae60;
   --red:      #c0392b;
   --purple:   #7d3c98;
+  --gold:     #c8960a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,46 +28,24 @@ body {
   min-height: 100svh;
 }
 
-/* === HEADER === */
 header {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
   padding: 1.1rem 1.4rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  display: flex; align-items: center; gap: 1rem;
   box-shadow: 0 3px 12px rgba(0,0,0,.28);
 }
-
 .hdr-icon {
   width: 46px; height: 46px;
   background: rgba(255,255,255,.15);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.55rem;
-  flex-shrink: 0;
+  font-size: 1.55rem; flex-shrink: 0;
 }
+.hdr-text h1 { color: #fff; font-size: clamp(.95rem, 4vw, 1.3rem); font-weight: 800; letter-spacing: .04em; }
+.hdr-text p  { color: #a8c8e8; font-size: .72rem; margin-top: .1rem; }
 
-.hdr-text h1 {
-  color: #fff;
-  font-size: clamp(.95rem, 4vw, 1.3rem);
-  font-weight: 800;
-  letter-spacing: .04em;
-}
+main { max-width: 860px; margin: 0 auto; padding: 1.4rem 1rem 3rem; }
 
-.hdr-text p {
-  color: #a8c8e8;
-  font-size: .72rem;
-  margin-top: .1rem;
-}
-
-/* === MAIN === */
-main {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 1.4rem 1rem 3rem;
-}
-
-/* === CARD === */
 .card {
   background: var(--card);
   border-radius: .9rem;
@@ -75,27 +54,53 @@ main {
   box-shadow: 0 2px 10px rgba(0,0,0,.07);
 }
 
-/* === FORM === */
-.form-card h2 {
-  font-size: 1rem; color: var(--navy);
-  margin-bottom: .9rem;
-  display: flex; align-items: center; gap: .4rem;
+/* APIキー */
+.key-card { border-left: 4px solid var(--gold); }
+.key-toggle {
+  background: none; border: none; color: var(--ocean);
+  font-family: inherit; font-size: .88rem; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: .5rem;
+  padding: 0; width: 100%; text-align: left;
 }
+.badge {
+  display: inline-block; padding: .15rem .55rem;
+  border-radius: 999px; font-size: .7rem; font-weight: 700;
+}
+.badge-ok { background: #d5f5e3; color: #1e8449; }
+.badge-ng { background: #fadbd8; color: #922b21; }
+.key-body { display: none; margin-top: 1rem; }
+.key-body.open { display: block; }
+.key-note {
+  font-size: .75rem; color: #556; line-height: 1.65;
+  background: #fffbec; padding: .55rem .75rem;
+  border-radius: .45rem; border: 1px solid #f0c820;
+  margin-bottom: .8rem;
+}
+.form-label { display: block; font-size: .78rem; font-weight: 700; color: var(--navy); margin-bottom: .35rem; }
+.input-row { display: flex; gap: .55rem; }
 
-.company-row { display: flex; gap: .7rem; align-items: stretch; }
-.company-row input { flex: 1; }
-
-input[type="text"] {
-  width: 100%;
-  padding: .72rem 1rem;
-  border: 2px solid #c8d8ea;
-  border-radius: .55rem;
-  font-family: inherit; font-size: .95rem;
-  color: var(--text); outline: none;
-  transition: border-color .15s;
+input[type="text"], input[type="password"] {
+  width: 100%; padding: .72rem 1rem;
+  border: 2px solid #c8d8ea; border-radius: .55rem;
+  font-family: inherit; font-size: .95rem; color: var(--text);
+  outline: none; transition: border-color .15s;
 }
 input:focus { border-color: var(--ocean); }
 
+.btn-s {
+  padding: 0 1.1rem; border: none; border-radius: .55rem;
+  font-family: inherit; font-size: .82rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: background .15s;
+}
+.btn-save   { background: var(--ocean); color: #fff; }
+.btn-del    { background: #c0392b;      color: #fff; }
+.btn-save:hover { background: var(--navy); }
+.btn-del:hover  { background: #962d22; }
+
+/* フォーム */
+.form-card h2 { font-size: 1rem; color: var(--navy); margin-bottom: .9rem; display: flex; align-items: center; gap: .4rem; }
+.company-row { display: flex; gap: .7rem; align-items: stretch; }
+.company-row input { flex: 1; }
 .btn-analyze {
   padding: 0 1.6rem;
   background: linear-gradient(135deg, var(--orange) 0%, #b85000 100%);
@@ -105,189 +110,82 @@ input:focus { border-color: var(--ocean); }
   box-shadow: 0 3px 10px rgba(224,112,32,.35);
   transition: all .18s;
 }
-.btn-analyze:hover   { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(224,112,32,.4); }
+.btn-analyze:hover    { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(224,112,32,.4); }
 .btn-analyze:disabled { background: #aaa; box-shadow: none; cursor: default; transform: none; }
 
-/* === ERROR === */
+/* エラー */
 .error-box {
-  background: #fff0f0;
-  border-left: 4px solid var(--red);
-  padding: .9rem 1.1rem;
-  border-radius: 0 .65rem .65rem 0;
-  color: #922;
-  font-size: .86rem; line-height: 1.65;
-  margin-bottom: .9rem;
-  display: none;
+  background: #fff0f0; border-left: 4px solid var(--red);
+  padding: .9rem 1.1rem; border-radius: 0 .65rem .65rem 0;
+  color: #922; font-size: .86rem; line-height: 1.65;
+  margin-bottom: .9rem; display: none;
 }
 .error-box.show { display: block; }
 
-/* === LOADING === */
+/* ローディング */
 .loading { text-align: center; padding: 2.8rem 1rem; display: none; }
 .loading.show { display: block; }
-
 .spinner {
   width: 50px; height: 50px;
-  border: 4px solid #c8dcea;
-  border-top-color: var(--ocean);
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-  margin: 0 auto .9rem;
+  border: 4px solid #c8dcea; border-top-color: var(--ocean);
+  border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto .9rem;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-
 .loading-text { color: var(--ocean); font-weight: 700; font-size: .92rem; }
 .loading-sub  { color: #778; font-size: .76rem; margin-top: .3rem; }
 
-/* === RESULTS === */
+/* 結果 */
 .results { display: none; }
 .results.show { display: block; }
 
-/* --- Score card --- */
-.score-card {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--ocean) 100%);
-  color: #fff;
-}
-
-.score-inner {
-  display: flex; align-items: center;
-  gap: 1.5rem; flex-wrap: wrap;
-}
-
+.score-card { background: linear-gradient(135deg, var(--navy) 0%, var(--ocean) 100%); color: #fff; }
+.score-inner { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
 .score-circle {
-  width: 110px; height: 110px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.12);
-  border: 4px solid rgba(255,255,255,.35);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  flex-shrink: 0;
+  width: 110px; height: 110px; border-radius: 50%;
+  background: rgba(255,255,255,.12); border: 4px solid rgba(255,255,255,.35);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
 }
-
-.score-num {
-  font-size: 2.4rem; font-weight: 900; line-height: 1;
-}
+.score-num { font-size: 2.4rem; font-weight: 900; line-height: 1; }
 .score-s { color: #5dce80; }
 .score-a { color: #5bc8ee; }
 .score-b { color: #f5c842; }
 .score-c { color: #f58a5d; }
-
 .score-unit { font-size: .62rem; opacity: .7; margin-top: .12rem; }
+.company-label { font-size: clamp(.82rem, 3vw, 1rem); font-weight: 700; opacity: .8; margin-bottom: .3rem; }
+.score-summary { font-size: clamp(.95rem, 4vw, 1.25rem); font-weight: 800; line-height: 1.45; }
 
-.score-text .company-label {
-  font-size: clamp(.82rem, 3vw, 1rem);
-  font-weight: 700; opacity: .8;
-  margin-bottom: .3rem;
-}
-.score-text .score-summary {
-  font-size: clamp(.95rem, 4vw, 1.25rem);
-  font-weight: 800; line-height: 1.45;
-}
-
-/* --- Section label --- */
 .sec-label {
-  font-size: .72rem; font-weight: 800;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--ocean);
-  margin-bottom: .85rem;
-  display: flex; align-items: center; gap: .4rem;
+  font-size: .72rem; font-weight: 800; letter-spacing: .12em;
+  color: var(--ocean); margin-bottom: .85rem; display: flex; align-items: center; gap: .4rem;
 }
+.compat-text { font-size: .88rem; line-height: 1.85; color: #334; }
 
-/* --- Compat --- */
-.compat-text {
-  font-size: .88rem; line-height: 1.85; color: #334;
-}
-
-/* --- Merit grid --- */
-.merit-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
+.merit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 520px) { .merit-grid { grid-template-columns: 1fr; } }
-
-.merit-col h3 {
-  font-size: .82rem; font-weight: 800;
-  margin-bottom: .55rem;
-  display: flex; align-items: center; gap: .3rem;
-}
+.merit-col h3 { font-size: .82rem; font-weight: 800; margin-bottom: .55rem; display: flex; align-items: center; gap: .3rem; }
 .merit-col.pro h3 { color: var(--green); }
 .merit-col.con h3 { color: var(--red); }
-
 .merit-list { list-style: none; }
-.merit-list li {
-  padding: .45rem .65rem;
-  border-radius: .5rem;
-  font-size: .82rem; line-height: 1.55;
-  margin-bottom: .38rem;
-  display: flex; gap: .4rem; align-items: flex-start;
-}
+.merit-list li { padding: .45rem .65rem; border-radius: .5rem; font-size: .82rem; line-height: 1.55; margin-bottom: .38rem; display: flex; gap: .4rem; align-items: flex-start; }
 .merit-icon { flex-shrink: 0; margin-top: .05rem; }
 .merit-col.pro li { background: #edfbf3; color: #1a5c30; }
 .merit-col.con li { background: #fff3f3; color: #7a2020; }
 
-/* --- Subsidies --- */
 .subsidy-list { list-style: none; }
-
-.subsidy-item {
-  padding: .8rem 1rem;
-  border: 1.5px solid #dce8f0;
-  border-radius: .7rem;
-  margin-bottom: .6rem;
-  background: #f8fbff;
-  transition: border-color .15s;
-}
+.subsidy-item { padding: .8rem 1rem; border: 1.5px solid #dce8f0; border-radius: .7rem; margin-bottom: .6rem; background: #f8fbff; transition: border-color .15s; }
 .subsidy-item:hover { border-color: var(--ocean); }
-
-.sub-name {
-  font-weight: 800; font-size: .88rem;
-  color: var(--navy);
-  margin-bottom: .15rem;
-  display: flex; align-items: center; gap: .4rem;
-}
-.sub-amount {
-  font-size: .78rem; color: var(--orange);
-  font-weight: 700; margin-bottom: .2rem;
-}
+.sub-name { font-weight: 800; font-size: .88rem; color: var(--navy); margin-bottom: .15rem; display: flex; align-items: center; gap: .4rem; }
+.sub-amount { font-size: .78rem; color: var(--orange); font-weight: 700; margin-bottom: .2rem; }
 .sub-desc { font-size: .78rem; color: #556; line-height: 1.6; }
 
-/* --- Innovation --- */
-.innovation-box {
-  background: #f3fbf0;
-  border-left: 4px solid var(--green);
-  border-radius: 0 .65rem .65rem 0;
-  padding: 1rem 1.1rem;
-  font-size: .86rem; line-height: 1.85;
-  color: #1a4020;
-}
+.innovation-box { background: #f3fbf0; border-left: 4px solid var(--green); border-radius: 0 .65rem .65rem 0; padding: 1rem 1.1rem; font-size: .86rem; line-height: 1.85; color: #1a4020; }
 
-/* --- Sales talk --- */
-.sales-box {
-  background: #f6f3ff;
-  border-left: 4px solid var(--purple);
-  border-radius: 0 .8rem .8rem 0;
-  padding: 1.1rem 1.2rem;
-  font-size: .88rem; line-height: 1.9;
-  color: #2a1a4a;
-  position: relative;
-}
+.sales-box { background: #f6f3ff; border-left: 4px solid var(--purple); border-radius: 0 .8rem .8rem 0; padding: 1.1rem 1.2rem; font-size: .88rem; line-height: 1.9; color: #2a1a4a; position: relative; }
+.copy-btn { position: absolute; top: .65rem; right: .65rem; background: var(--navy); color: #fff; border: none; border-radius: .4rem; padding: .28rem .65rem; font-family: inherit; font-size: .7rem; font-weight: 700; cursor: pointer; transition: background .15s; }
+.copy-btn:hover  { background: var(--ocean); }
+.copy-btn.copied { background: var(--green); }
 
-.copy-btn {
-  position: absolute; top: .65rem; right: .65rem;
-  background: var(--navy); color: #fff; border: none;
-  border-radius: .4rem;
-  padding: .28rem .65rem;
-  font-family: inherit; font-size: .7rem; font-weight: 700;
-  cursor: pointer; transition: background .15s;
-}
-.copy-btn:hover    { background: var(--ocean); }
-.copy-btn.copied   { background: var(--green); }
-
-/* === FOOTER === */
-footer {
-  text-align: center;
-  padding: 1.2rem 1rem 2.5rem;
-  color: #9aa; font-size: .72rem; line-height: 1.75;
-}
+footer { text-align: center; padding: 1.2rem 1rem 2.5rem; color: #9aa; font-size: .72rem; line-height: 1.75; }
 </style>
 </head>
 <body>
@@ -302,6 +200,26 @@ footer {
 
 <main>
 
+  <!-- APIキー -->
+  <div class="card key-card">
+    <button class="key-toggle" onclick="toggleKey()">
+      🔑 <span>Claude APIキー設定</span>
+      <span id="keyBadge" class="badge badge-ng">未設定</span>
+    </button>
+    <div class="key-body" id="keyBody">
+      <p class="key-note">
+        ⚠️ APIキーはこのブラウザの中だけに保存されます。他の人には見えません。<br>
+        公用PCを使う場合は、使い終わったら「削除」を押してください。
+      </p>
+      <label class="form-label">APIキー</label>
+      <div class="input-row">
+        <input type="password" id="keyInput" placeholder="sk-ant-..." />
+        <button class="btn-s btn-save" onclick="saveKey()">保存</button>
+        <button class="btn-s btn-del"  onclick="deleteKey()">削除</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 企業名入力 -->
   <div class="card form-card">
     <h2>🏭 分析したい企業名を入力してください</h2>
@@ -309,26 +227,20 @@ footer {
       <input type="text" id="companyInput"
              placeholder="例：ソフトバンク株式会社、任天堂株式会社 など"
              onkeydown="if(event.key==='Enter') analyze()" />
-      <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">
-        分析する
-      </button>
+      <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">分析する</button>
     </div>
   </div>
 
-  <!-- エラー表示 -->
   <div class="error-box" id="errorBox"></div>
 
-  <!-- 読み込み中 -->
   <div class="loading" id="loading">
     <div class="spinner"></div>
     <p class="loading-text">AIが分析中です...</p>
     <p class="loading-sub">企業情報・補助金・営業トークを作成しています（20〜30秒ほどかかります）</p>
   </div>
 
-  <!-- 分析結果 -->
   <div class="results" id="results">
 
-    <!-- スコア -->
     <div class="card score-card">
       <div class="score-inner">
         <div class="score-circle">
@@ -342,13 +254,11 @@ footer {
       </div>
     </div>
 
-    <!-- 相性の内容 -->
     <div class="card">
       <div class="sec-label">🤝 相性の内容</div>
       <p class="compat-text" id="compatText"></p>
     </div>
 
-    <!-- メリット・デメリット -->
     <div class="card">
       <div class="sec-label">📍 立地のメリット・デメリット</div>
       <div class="merit-grid">
@@ -363,19 +273,16 @@ footer {
       </div>
     </div>
 
-    <!-- 補助金 -->
     <div class="card">
       <div class="sec-label">💰 活用できる補助金・優遇制度</div>
       <ul class="subsidy-list" id="subsidyList"></ul>
     </div>
 
-    <!-- イノベーション性 -->
     <div class="card">
       <div class="sec-label">💡 地元企業とのイノベーション性</div>
       <div class="innovation-box" id="innovationText"></div>
     </div>
 
-    <!-- 営業トーク -->
     <div class="card">
       <div class="sec-label">💬 営業トークの例</div>
       <div class="sales-box">
@@ -384,7 +291,7 @@ footer {
       </div>
     </div>
 
-  </div><!-- /results -->
+  </div>
 
 </main>
 
@@ -394,47 +301,58 @@ footer {
 </footer>
 
 <script>
-var WORKER_URL = 'https://ws.bokumarkun0428.workers.dev/';
+var WORKER_URL = 'https://wwwww.bokumarkun0428.workers.dev/';
 
-/* ===========================
-   UI ヘルパー
-=========================== */
-function showError(msg) {
-  var el = document.getElementById('errorBox');
-  el.textContent = msg;
-  el.classList.add('show');
+function loadKey() {
+  var k = localStorage.getItem('_kesen_key') || '';
+  document.getElementById('keyInput').value = k;
+  var badge = document.getElementById('keyBadge');
+  if (k) { badge.textContent = '設定済み'; badge.className = 'badge badge-ok'; }
+  else    { badge.textContent = '未設定';   badge.className = 'badge badge-ng'; }
+  return k;
 }
-function clearError() {
-  document.getElementById('errorBox').classList.remove('show');
+function saveKey() {
+  var k = document.getElementById('keyInput').value.trim();
+  if (!k) { alert('APIキーを入力してください。'); return; }
+  localStorage.setItem('_kesen_key', k);
+  loadKey();
+  document.getElementById('keyBody').classList.remove('open');
+  alert('APIキーを保存しました！');
 }
-function setLoading(on) {
-  document.getElementById('loading').classList.toggle('show', on);
-  document.getElementById('analyzeBtn').disabled = on;
+function deleteKey() {
+  if (!confirm('APIキーを削除しますか？')) return;
+  localStorage.removeItem('_kesen_key');
+  document.getElementById('keyInput').value = '';
+  loadKey();
 }
-function showResults(on) {
-  document.getElementById('results').classList.toggle('show', on);
-}
+function toggleKey() { document.getElementById('keyBody').classList.toggle('open'); }
 
-/* ===========================
-   分析メイン処理
-=========================== */
+loadKey();
+
+function showError(msg) { var el = document.getElementById('errorBox'); el.textContent = msg; el.classList.add('show'); }
+function clearError()   { document.getElementById('errorBox').classList.remove('show'); }
+function setLoading(on) { document.getElementById('loading').classList.toggle('show', on); document.getElementById('analyzeBtn').disabled = on; }
+function showResults(on){ document.getElementById('results').classList.toggle('show', on); }
+
 async function analyze() {
   clearError();
   showResults(false);
 
   var company = document.getElementById('companyInput').value.trim();
+  var apiKey  = loadKey();
 
-  if (!company) {
-    showError('企業名を入力してください。');
-    return;
-  }
+  if (!company) { showError('企業名を入力してください。'); return; }
+  if (!apiKey)  { showError('APIキーが設定されていません。上の「🔑 Claude APIキー設定」を開いて保存してください。'); return; }
 
   setLoading(true);
 
   try {
     var response = await fetch(WORKER_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+      },
       body: JSON.stringify({
         model: 'claude-opus-5',
         max_tokens: 2048,
@@ -449,20 +367,18 @@ async function analyze() {
         var errData = await response.json();
         if (errData.error && errData.error.message) errMsg = errData.error.message;
       } catch (_) {}
+      if (response.status === 401) errMsg = 'APIキーが正しくありません。設定を確認してください。';
       if (response.status === 429) errMsg = 'リクエストが多すぎます。少し待ってからもう一度お試しください。';
       throw new Error(errMsg);
     }
 
     var data = await response.json();
     var text = (data.content && data.content[0] && data.content[0].text) || '';
-
     var match = text.match(/\{[\s\S]*\}/);
     if (!match) throw new Error('AIの回答からデータを取り出せませんでした。もう一度お試しください。');
-
     var result;
     try { result = JSON.parse(match[0]); }
     catch (e) { throw new Error('データの解析に失敗しました。もう一度お試しください。'); }
-
     renderResults(company, result);
 
   } catch (err) {
@@ -472,9 +388,6 @@ async function analyze() {
   }
 }
 
-/* ===========================
-   Claude へのプロンプト
-=========================== */
 function buildSystem() {
   return 'あなたは気仙沼市の企業誘致専門AIアシスタントです。\n' +
     '指定された企業と気仙沼市の相性を詳しく分析し、必ず下記のJSON形式のみで回答してください。\n' +
@@ -522,81 +435,48 @@ function buildPrompt(company) {
     '- salesTalk: 実際の営業訪問で使えるリアルな話法（担当者が言いやすい自然な日本語で）';
 }
 
-/* ===========================
-   結果の表示
-=========================== */
 function renderResults(company, r) {
   var score = Math.max(0, Math.min(100, Number(r.score) || 0));
   var numEl = document.getElementById('scoreNum');
   numEl.textContent = score;
-  numEl.className = 'score-num ' + scoreColorClass(score);
+  numEl.className = 'score-num ' + (score >= 80 ? 'score-s' : score >= 60 ? 'score-a' : score >= 40 ? 'score-b' : 'score-c');
 
   document.getElementById('companyLabel').textContent = company + '  ×  気仙沼市';
   document.getElementById('scoreSummary').textContent = r.summary || '';
-
   document.getElementById('compatText').textContent = r.compatibility || '';
 
-  var ml = document.getElementById('meritList');
-  ml.innerHTML = (r.merits || []).map(function(m) {
+  document.getElementById('meritList').innerHTML = (r.merits || []).map(function(m) {
     return '<li><span class="merit-icon">✅</span>' + esc(m) + '</li>';
   }).join('');
-
-  var dl = document.getElementById('demeritList');
-  dl.innerHTML = (r.demerits || []).map(function(d) {
+  document.getElementById('demeritList').innerHTML = (r.demerits || []).map(function(d) {
     return '<li><span class="merit-icon">⚠️</span>' + esc(d) + '</li>';
   }).join('');
-
-  var sl = document.getElementById('subsidyList');
-  sl.innerHTML = (r.subsidies || []).map(function(s) {
-    return '<li class="subsidy-item">' +
-      '<div class="sub-name">💰 ' + esc(s.name || '') + '</div>' +
-      '<div class="sub-amount">' + esc(s.amount || '') + '</div>' +
-      '<div class="sub-desc">' + esc(s.desc || '') + '</div>' +
-      '</li>';
+  document.getElementById('subsidyList').innerHTML = (r.subsidies || []).map(function(s) {
+    return '<li class="subsidy-item"><div class="sub-name">💰 ' + esc(s.name||'') + '</div>' +
+      '<div class="sub-amount">' + esc(s.amount||'') + '</div>' +
+      '<div class="sub-desc">' + esc(s.desc||'') + '</div></li>';
   }).join('');
 
   document.getElementById('innovationText').textContent = r.innovation || '';
   document.getElementById('salesTalkText').textContent = r.salesTalk || '';
-
-  var copyBtn = document.getElementById('copyBtn');
-  copyBtn.textContent = 'コピー';
-  copyBtn.className = 'copy-btn';
+  var btn = document.getElementById('copyBtn');
+  btn.textContent = 'コピー'; btn.className = 'copy-btn';
 
   showResults(true);
   document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function scoreColorClass(score) {
-  if (score >= 80) return 'score-s';
-  if (score >= 60) return 'score-a';
-  if (score >= 40) return 'score-b';
-  return 'score-c';
-}
-
 function esc(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ===========================
-   営業トークをコピー
-=========================== */
 function copySalesTalk() {
   var text = document.getElementById('salesTalkText').textContent;
   navigator.clipboard.writeText(text).then(function() {
     var btn = document.getElementById('copyBtn');
-    btn.textContent = 'コピー完了！';
-    btn.className = 'copy-btn copied';
-    setTimeout(function() {
-      btn.textContent = 'コピー';
-      btn.className = 'copy-btn';
-    }, 2000);
-  }).catch(function() {
-    alert('コピーに失敗しました。テキストを手動でコピーしてください。');
-  });
+    btn.textContent = 'コピー完了！'; btn.className = 'copy-btn copied';
+    setTimeout(function() { btn.textContent = 'コピー'; btn.className = 'copy-btn'; }, 2000);
+  }).catch(function() { alert('コピーに失敗しました。手動でコピーしてください。'); });
 }
 </script>
 
