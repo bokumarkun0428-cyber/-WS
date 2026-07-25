@@ -16,7 +16,6 @@
   --green:    #27ae60;
   --red:      #c0392b;
   --purple:   #7d3c98;
-  --gold:     #c8960a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -76,77 +75,6 @@ main {
   box-shadow: 0 2px 10px rgba(0,0,0,.07);
 }
 
-/* === API KEY === */
-.key-card { border-left: 4px solid var(--gold); }
-
-.key-toggle {
-  background: none; border: none;
-  color: var(--ocean); font-family: inherit;
-  font-size: .88rem; font-weight: 700;
-  cursor: pointer;
-  display: flex; align-items: center; gap: .5rem;
-  padding: 0; width: 100%; text-align: left;
-}
-
-.key-status-badge {
-  display: inline-block;
-  padding: .15rem .55rem;
-  border-radius: 999px;
-  font-size: .7rem;
-  font-weight: 700;
-}
-.badge-ok { background: #d5f5e3; color: #1e8449; }
-.badge-ng { background: #fadbd8; color: #922b21; }
-
-.key-body { display: none; margin-top: 1rem; }
-.key-body.open { display: block; }
-
-.key-note {
-  font-size: .75rem;
-  color: #556;
-  margin-bottom: .8rem;
-  line-height: 1.65;
-  background: #fffbec;
-  padding: .55rem .75rem;
-  border-radius: .45rem;
-  border: 1px solid #f0c820;
-}
-
-.form-label {
-  display: block;
-  font-size: .78rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: .35rem;
-  letter-spacing: .04em;
-}
-
-.input-row { display: flex; gap: .55rem; }
-
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: .72rem 1rem;
-  border: 2px solid #c8d8ea;
-  border-radius: .55rem;
-  font-family: inherit; font-size: .95rem;
-  color: var(--text); outline: none;
-  transition: border-color .15s;
-}
-input:focus { border-color: var(--ocean); }
-
-.btn-small {
-  padding: 0 1.1rem;
-  border: none; border-radius: .55rem;
-  font-family: inherit; font-size: .82rem; font-weight: 700;
-  cursor: pointer; white-space: nowrap;
-  transition: background .15s;
-}
-.btn-save   { background: var(--ocean); color: #fff; }
-.btn-delete { background: #c0392b;      color: #fff; }
-.btn-save:hover   { background: var(--navy); }
-.btn-delete:hover { background: #962d22; }
-
 /* === FORM === */
 .form-card h2 {
   font-size: 1rem; color: var(--navy);
@@ -156,6 +84,17 @@ input:focus { border-color: var(--ocean); }
 
 .company-row { display: flex; gap: .7rem; align-items: stretch; }
 .company-row input { flex: 1; }
+
+input[type="text"] {
+  width: 100%;
+  padding: .72rem 1rem;
+  border: 2px solid #c8d8ea;
+  border-radius: .55rem;
+  font-family: inherit; font-size: .95rem;
+  color: var(--text); outline: none;
+  transition: border-color .15s;
+}
+input:focus { border-color: var(--ocean); }
 
 .btn-analyze {
   padding: 0 1.6rem;
@@ -363,27 +302,6 @@ footer {
 
 <main>
 
-  <!-- APIキー設定 -->
-  <div class="card key-card">
-    <button class="key-toggle" onclick="toggleKey()">
-      🔑 <span>Claude APIキー設定</span>
-      <span id="keyBadge" class="key-status-badge badge-ng">未設定</span>
-    </button>
-    <div class="key-body" id="keyBody">
-      <p class="key-note">
-        ⚠️ APIキーはこのブラウザの中だけに保存されます。他の人には見えません。<br>
-        公用PCを使う場合は、使い終わったら「削除」ボタンを押してください。<br>
-        APIキーは Anthropic の管理サイト（<strong>console.anthropic.com</strong>）で取得できます。
-      </p>
-      <label class="form-label">APIキー</label>
-      <div class="input-row">
-        <input type="password" id="keyInput" placeholder="sk-ant-..." />
-        <button class="btn-small btn-save"   onclick="saveKey()">保存</button>
-        <button class="btn-small btn-delete" onclick="deleteKey()">削除</button>
-      </div>
-    </div>
-  </div>
-
   <!-- 企業名入力 -->
   <div class="card form-card">
     <h2>🏭 分析したい企業名を入力してください</h2>
@@ -476,44 +394,7 @@ footer {
 </footer>
 
 <script>
-/* ===========================
-   APIキー管理
-=========================== */
-function loadKey() {
-  var k = localStorage.getItem('_kesen_api_key') || '';
-  document.getElementById('keyInput').value = k;
-  var badge = document.getElementById('keyBadge');
-  if (k) {
-    badge.textContent = '設定済み';
-    badge.className = 'key-status-badge badge-ok';
-  } else {
-    badge.textContent = '未設定';
-    badge.className = 'key-status-badge badge-ng';
-  }
-  return k;
-}
-
-function saveKey() {
-  var k = document.getElementById('keyInput').value.trim();
-  if (!k) { alert('APIキーを入力してください。'); return; }
-  localStorage.setItem('_kesen_api_key', k);
-  loadKey();
-  document.getElementById('keyBody').classList.remove('open');
-  alert('APIキーを保存しました！');
-}
-
-function deleteKey() {
-  if (!confirm('保存しているAPIキーを削除しますか？')) return;
-  localStorage.removeItem('_kesen_api_key');
-  document.getElementById('keyInput').value = '';
-  loadKey();
-}
-
-function toggleKey() {
-  document.getElementById('keyBody').classList.toggle('open');
-}
-
-loadKey();
+var WORKER_URL = 'https://ws.bokumarkun0428.workers.dev/';
 
 /* ===========================
    UI ヘルパー
@@ -542,28 +423,18 @@ async function analyze() {
   showResults(false);
 
   var company = document.getElementById('companyInput').value.trim();
-  var apiKey  = loadKey();
 
   if (!company) {
     showError('企業名を入力してください。');
-    return;
-  }
-  if (!apiKey) {
-    showError('APIキーが設定されていません。画面上部の「🔑 Claude APIキー設定」を開いて保存してください。');
     return;
   }
 
   setLoading(true);
 
   try {
-    var response = await fetch('https://api.anthropic.com/v1/messages', {
+    var response = await fetch(WORKER_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-allow-browser': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-opus-5',
         max_tokens: 2048,
@@ -573,12 +444,11 @@ async function analyze() {
     });
 
     if (!response.ok) {
-      var errMsg = 'APIエラー（' + response.status + '）';
+      var errMsg = 'エラーが発生しました（' + response.status + '）';
       try {
         var errData = await response.json();
         if (errData.error && errData.error.message) errMsg = errData.error.message;
       } catch (_) {}
-      if (response.status === 401) errMsg = 'APIキーが正しくありません。設定を確認してください。';
       if (response.status === 429) errMsg = 'リクエストが多すぎます。少し待ってからもう一度お試しください。';
       throw new Error(errMsg);
     }
