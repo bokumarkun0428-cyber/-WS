@@ -3,471 +3,732 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ほやぼーや案内所 | 気仙沼グルメ</title>
+<title>企業誘致 営業サポートツール｜気仙沼市</title>
 <style>
-  :root {
-    --ocean:      #2b7fa8;
-    --ocean-dark: #1a5a80;
-    --orange:     #e05c00;
-    --orange-lt:  #ff8c2a;
-    --text:       #1a3a4c;
-    --gray:       #556677;
-  }
+:root {
+  --navy:     #1a3556;
+  --navy-mid: #2563a8;
+  --ocean:    #2980b9;
+  --orange:   #e07020;
+  --bg:       #eef3f9;
+  --card:     #ffffff;
+  --text:     #1a2a3a;
+  --green:    #27ae60;
+  --red:      #c0392b;
+  --purple:   #7d3c98;
+  --gold:     #c8960a;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
-    background: linear-gradient(180deg, #b3e0f5 0%, #6bbdd8 55%, #2e7fa8 100%);
-    min-height: 100svh;
-    color: var(--text);
-    padding-bottom: 3rem;
-  }
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100svh;
+}
 
-  /* ===== ヘッダー ===== */
-  header {
-    text-align: center;
-    padding: 1.8rem 1rem 1.2rem;
-  }
-  .mascot { width: 72px; height: 72px; margin: 0 auto 0.7rem; }
-  header h1 {
-    font-size: clamp(1.2rem, 5vw, 1.9rem);
-    color: #fff;
-    text-shadow: 1px 2px 0 var(--ocean-dark);
-    letter-spacing: 0.1em;
-  }
-  header p {
-    color: #d6f0ff;
-    font-size: clamp(0.82rem, 3vw, 0.95rem);
-    margin-top: 0.3rem;
-  }
+/* === HEADER === */
+header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 3px 12px rgba(0,0,0,.28);
+}
 
-  /* ===== カード共通 ===== */
-  .card {
-    background: #fff;
-    border-radius: 1.4rem;
-    padding: 1.4rem;
-    margin: 0 1rem 1.2rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.13);
-  }
-  .section-label {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ocean-dark);
-    margin-bottom: 1rem;
-  }
+.hdr-icon {
+  width: 46px; height: 46px;
+  background: rgba(255,255,255,.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.55rem;
+  flex-shrink: 0;
+}
 
-  /* ===== 気分ボタン ===== */
-  .mood-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.55rem;
-  }
-  .mood-btn {
-    background: #f0f8ff;
-    border: 2px solid #cce4f5;
-    border-radius: 0.9rem;
-    padding: 0.75rem 0.4rem;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.88rem;
-    color: var(--text);
-    text-align: center;
-    transition: all 0.18s;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    line-height: 1.4;
-  }
-  .mood-btn .em { font-size: 1.7rem; display: block; margin-bottom: 0.2rem; }
-  .mood-btn.selected {
-    background: var(--ocean);
-    border-color: var(--ocean-dark);
-    color: #fff;
-    transform: scale(1.04);
-    box-shadow: 0 3px 10px rgba(43,127,168,0.4);
-  }
+.hdr-text h1 {
+  color: #fff;
+  font-size: clamp(.95rem, 4vw, 1.3rem);
+  font-weight: 800;
+  letter-spacing: .04em;
+}
 
-  /* ===== 検索ボタン ===== */
-  .search-btn {
-    display: block;
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.95rem;
-    background: linear-gradient(135deg, var(--orange-lt), var(--orange));
-    color: #fff;
-    border: none;
-    border-radius: 1rem;
-    font-family: inherit;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(224,92,0,0.35);
-    transition: all 0.18s;
-  }
-  .search-btn:not(:disabled):hover,
-  .search-btn:not(:disabled):active {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(224,92,0,0.45);
-  }
-  .search-btn:disabled {
-    background: #c8d8e4;
-    box-shadow: none;
-    cursor: default;
-  }
+.hdr-text p {
+  color: #a8c8e8;
+  font-size: .72rem;
+  margin-top: .1rem;
+}
 
-  /* ===== 結果エリア ===== */
-  .results { margin: 0 1rem; display: none; }
-  .results.show { display: block; }
+/* === MAIN === */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.4rem 1rem 3rem;
+}
 
-  .results-title {
-    text-align: center;
-    color: #fff;
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-    font-weight: 700;
-    text-shadow: 1px 2px 0 var(--ocean-dark);
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
+/* === CARD === */
+.card {
+  background: var(--card);
+  border-radius: .9rem;
+  padding: 1.3rem 1.5rem;
+  margin-bottom: .9rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+}
 
-  /* ===== お店カード ===== */
-  .shop-card {
-    background: #fff;
-    border-radius: 1.2rem;
-    padding: 1.1rem;
-    margin-bottom: 0.9rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    display: flex;
-    gap: 0.85rem;
-    align-items: flex-start;
-    animation: slideIn 0.35s ease both;
-  }
-  .shop-card:nth-child(2) { animation-delay: 0.1s; }
-  .shop-card:nth-child(3) { animation-delay: 0.2s; }
+/* === API KEY === */
+.key-card { border-left: 4px solid var(--gold); }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+.key-toggle {
+  background: none; border: none;
+  color: var(--ocean); font-family: inherit;
+  font-size: .88rem; font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; gap: .5rem;
+  padding: 0; width: 100%; text-align: left;
+}
 
-  .rank-badge {
-    min-width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-    font-size: 0.68rem;
-    line-height: 1.2;
-  }
-  .rank-badge .rank-num { font-size: 1rem; }
-  .rank-1 { background: linear-gradient(135deg,#ffe066,#f5a623); color:#7a5000; }
-  .rank-2 { background: linear-gradient(135deg,#e8eef5,#a8b8c8); color:#445566; }
-  .rank-3 { background: linear-gradient(135deg,#e8c9a8,#c87941); color:#5c3010; }
+.key-status-badge {
+  display: inline-block;
+  padding: .15rem .55rem;
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 700;
+}
+.badge-ok { background: #d5f5e3; color: #1e8449; }
+.badge-ng { background: #fadbd8; color: #922b21; }
 
-  .shop-info { flex: 1; min-width: 0; }
-  .shop-header {
-    display: flex;
-    align-items: baseline;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.2rem;
-  }
-  .shop-name { font-size: 1.05rem; font-weight: 700; }
-  .shop-genre {
-    font-size: 0.75rem;
-    color: var(--ocean);
-    font-weight: 600;
-    background: #e8f5ff;
-    padding: 0.1rem 0.5rem;
-    border-radius: 999px;
-  }
-  .shop-desc {
-    font-size: 0.82rem;
-    color: #556;
-    line-height: 1.7;
-    margin: 0.4rem 0;
-  }
-  .shop-recommend {
-    font-size: 0.8rem;
-    color: var(--orange);
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-  }
-  .shop-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    font-size: 0.78rem;
-    color: #778;
-    margin-bottom: 0.5rem;
-  }
-  .match-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-  .tag {
-    padding: 0.15rem 0.55rem;
-    border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    background: #eef5fa;
-    color: var(--ocean-dark);
-  }
-  .tag.hit { background: var(--ocean); color: #fff; }
+.key-body { display: none; margin-top: 1rem; }
+.key-body.open { display: block; }
 
-  /* ===== 注記 ===== */
-  .disclaimer {
-    text-align: center;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.74rem;
-    margin-top: 1.2rem;
-    padding: 0 1rem;
-  }
+.key-note {
+  font-size: .75rem;
+  color: #556;
+  margin-bottom: .8rem;
+  line-height: 1.65;
+  background: #fffbec;
+  padding: .55rem .75rem;
+  border-radius: .45rem;
+  border: 1px solid #f0c820;
+}
+
+.form-label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: .35rem;
+  letter-spacing: .04em;
+}
+
+.input-row { display: flex; gap: .55rem; }
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: .72rem 1rem;
+  border: 2px solid #c8d8ea;
+  border-radius: .55rem;
+  font-family: inherit; font-size: .95rem;
+  color: var(--text); outline: none;
+  transition: border-color .15s;
+}
+input:focus { border-color: var(--ocean); }
+
+.btn-small {
+  padding: 0 1.1rem;
+  border: none; border-radius: .55rem;
+  font-family: inherit; font-size: .82rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background .15s;
+}
+.btn-save   { background: var(--ocean); color: #fff; }
+.btn-delete { background: #c0392b;      color: #fff; }
+.btn-save:hover   { background: var(--navy); }
+.btn-delete:hover { background: #962d22; }
+
+/* === FORM === */
+.form-card h2 {
+  font-size: 1rem; color: var(--navy);
+  margin-bottom: .9rem;
+  display: flex; align-items: center; gap: .4rem;
+}
+
+.company-row { display: flex; gap: .7rem; align-items: stretch; }
+.company-row input { flex: 1; }
+
+.btn-analyze {
+  padding: 0 1.6rem;
+  background: linear-gradient(135deg, var(--orange) 0%, #b85000 100%);
+  color: #fff; border: none; border-radius: .6rem;
+  font-family: inherit; font-size: 1rem; font-weight: 800;
+  cursor: pointer; white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(224,112,32,.35);
+  transition: all .18s;
+}
+.btn-analyze:hover   { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(224,112,32,.4); }
+.btn-analyze:disabled { background: #aaa; box-shadow: none; cursor: default; transform: none; }
+
+/* === ERROR === */
+.error-box {
+  background: #fff0f0;
+  border-left: 4px solid var(--red);
+  padding: .9rem 1.1rem;
+  border-radius: 0 .65rem .65rem 0;
+  color: #922;
+  font-size: .86rem; line-height: 1.65;
+  margin-bottom: .9rem;
+  display: none;
+}
+.error-box.show { display: block; }
+
+/* === LOADING === */
+.loading { text-align: center; padding: 2.8rem 1rem; display: none; }
+.loading.show { display: block; }
+
+.spinner {
+  width: 50px; height: 50px;
+  border: 4px solid #c8dcea;
+  border-top-color: var(--ocean);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin: 0 auto .9rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text { color: var(--ocean); font-weight: 700; font-size: .92rem; }
+.loading-sub  { color: #778; font-size: .76rem; margin-top: .3rem; }
+
+/* === RESULTS === */
+.results { display: none; }
+.results.show { display: block; }
+
+/* --- Score card --- */
+.score-card {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--ocean) 100%);
+  color: #fff;
+}
+
+.score-inner {
+  display: flex; align-items: center;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+
+.score-circle {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 4px solid rgba(255,255,255,.35);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.score-num {
+  font-size: 2.4rem; font-weight: 900; line-height: 1;
+}
+.score-s { color: #5dce80; }
+.score-a { color: #5bc8ee; }
+.score-b { color: #f5c842; }
+.score-c { color: #f58a5d; }
+
+.score-unit { font-size: .62rem; opacity: .7; margin-top: .12rem; }
+
+.score-text .company-label {
+  font-size: clamp(.82rem, 3vw, 1rem);
+  font-weight: 700; opacity: .8;
+  margin-bottom: .3rem;
+}
+.score-text .score-summary {
+  font-size: clamp(.95rem, 4vw, 1.25rem);
+  font-weight: 800; line-height: 1.45;
+}
+
+/* --- Section label --- */
+.sec-label {
+  font-size: .72rem; font-weight: 800;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: .85rem;
+  display: flex; align-items: center; gap: .4rem;
+}
+
+/* --- Compat --- */
+.compat-text {
+  font-size: .88rem; line-height: 1.85; color: #334;
+}
+
+/* --- Merit grid --- */
+.merit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 520px) { .merit-grid { grid-template-columns: 1fr; } }
+
+.merit-col h3 {
+  font-size: .82rem; font-weight: 800;
+  margin-bottom: .55rem;
+  display: flex; align-items: center; gap: .3rem;
+}
+.merit-col.pro h3 { color: var(--green); }
+.merit-col.con h3 { color: var(--red); }
+
+.merit-list { list-style: none; }
+.merit-list li {
+  padding: .45rem .65rem;
+  border-radius: .5rem;
+  font-size: .82rem; line-height: 1.55;
+  margin-bottom: .38rem;
+  display: flex; gap: .4rem; align-items: flex-start;
+}
+.merit-icon { flex-shrink: 0; margin-top: .05rem; }
+.merit-col.pro li { background: #edfbf3; color: #1a5c30; }
+.merit-col.con li { background: #fff3f3; color: #7a2020; }
+
+/* --- Subsidies --- */
+.subsidy-list { list-style: none; }
+
+.subsidy-item {
+  padding: .8rem 1rem;
+  border: 1.5px solid #dce8f0;
+  border-radius: .7rem;
+  margin-bottom: .6rem;
+  background: #f8fbff;
+  transition: border-color .15s;
+}
+.subsidy-item:hover { border-color: var(--ocean); }
+
+.sub-name {
+  font-weight: 800; font-size: .88rem;
+  color: var(--navy);
+  margin-bottom: .15rem;
+  display: flex; align-items: center; gap: .4rem;
+}
+.sub-amount {
+  font-size: .78rem; color: var(--orange);
+  font-weight: 700; margin-bottom: .2rem;
+}
+.sub-desc { font-size: .78rem; color: #556; line-height: 1.6; }
+
+/* --- Innovation --- */
+.innovation-box {
+  background: #f3fbf0;
+  border-left: 4px solid var(--green);
+  border-radius: 0 .65rem .65rem 0;
+  padding: 1rem 1.1rem;
+  font-size: .86rem; line-height: 1.85;
+  color: #1a4020;
+}
+
+/* --- Sales talk --- */
+.sales-box {
+  background: #f6f3ff;
+  border-left: 4px solid var(--purple);
+  border-radius: 0 .8rem .8rem 0;
+  padding: 1.1rem 1.2rem;
+  font-size: .88rem; line-height: 1.9;
+  color: #2a1a4a;
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute; top: .65rem; right: .65rem;
+  background: var(--navy); color: #fff; border: none;
+  border-radius: .4rem;
+  padding: .28rem .65rem;
+  font-family: inherit; font-size: .7rem; font-weight: 700;
+  cursor: pointer; transition: background .15s;
+}
+.copy-btn:hover    { background: var(--ocean); }
+.copy-btn.copied   { background: var(--green); }
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 1.2rem 1rem 2.5rem;
+  color: #9aa; font-size: .72rem; line-height: 1.75;
+}
 </style>
 </head>
 <body>
 
-<!-- ===== ヘッダー ===== -->
 <header>
-  <svg class="mascot" viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="mg1" cx="40%" cy="35%" r="60%">
-        <stop offset="0%" stop-color="#ffb347"/>
-        <stop offset="70%" stop-color="#e05c00"/>
-        <stop offset="100%" stop-color="#a33a00"/>
-      </radialGradient>
-      <radialGradient id="mg2" cx="50%" cy="40%" r="55%">
-        <stop offset="0%" stop-color="#ffe9c8"/>
-        <stop offset="100%" stop-color="#ffcb80"/>
-      </radialGradient>
-    </defs>
-    <ellipse cx="40" cy="82" rx="18" ry="6" fill="#a33a00" opacity="0.45"/>
-    <ellipse cx="40" cy="56" rx="26" ry="28" fill="url(#mg1)"/>
-    <ellipse cx="40" cy="60" rx="16" ry="20" fill="url(#mg2)" opacity="0.85"/>
-    <rect x="24" y="28" width="10" height="17" rx="5" fill="#e05c00"/>
-    <ellipse cx="29" cy="27" rx="6" ry="3.5" fill="#ff9b3a"/>
-    <ellipse cx="29" cy="27" rx="4" ry="2.5" fill="#3a0a00"/>
-    <rect x="46" y="26" width="10" height="19" rx="5" fill="#e05c00"/>
-    <ellipse cx="51" cy="25" rx="6" ry="3.5" fill="#ff9b3a"/>
-    <ellipse cx="51" cy="25" rx="4" ry="2.5" fill="#3a0a00"/>
-    <ellipse cx="33" cy="57" rx="5" ry="5.5" fill="#fff"/>
-    <ellipse cx="34" cy="58" rx="3.2" ry="3.5" fill="#1a0a00"/>
-    <circle cx="35" cy="56.5" r="1.2" fill="#fff"/>
-    <ellipse cx="47" cy="57" rx="5" ry="5.5" fill="#fff"/>
-    <ellipse cx="48" cy="58" rx="3.2" ry="3.5" fill="#1a0a00"/>
-    <circle cx="49" cy="56.5" r="1.2" fill="#fff"/>
-    <ellipse cx="27" cy="63" rx="5" ry="3" fill="#ff7c7c" opacity="0.5"/>
-    <ellipse cx="53" cy="63" rx="5" ry="3" fill="#ff7c7c" opacity="0.5"/>
-    <path d="M35 68 Q40 73 45 68" stroke="#7a3000" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-    <ellipse cx="40" cy="44" rx="18" ry="4" fill="#1a3a5c"/>
-    <rect x="26" y="31" width="28" height="13" rx="4" fill="#2255a0"/>
-    <ellipse cx="40" cy="44" rx="20" ry="4.5" fill="#1a3a5c"/>
-    <text x="40" y="41" text-anchor="middle" font-size="7" fill="#fff" opacity="0.9">⚓</text>
-  </svg>
-  <h1>ほやぼーや案内所</h1>
-  <p>今の気分を選ぶと、気仙沼のお店をご紹介します！</p>
+  <div class="hdr-icon">🏢</div>
+  <div class="hdr-text">
+    <h1>企業誘致 営業サポートツール</h1>
+    <p>気仙沼市 産業部 企業誘致推進課</p>
+  </div>
 </header>
 
-<!-- ===== 気分選択 ===== -->
-<div class="card">
-  <div class="section-label">🎭 今の気分を選んでね（複数選べます）</div>
-  <div class="mood-grid" id="moodGrid">
-    <button class="mood-btn" data-mood="海の幸"><span class="em">🌊</span>海の幸を食べたい</button>
-    <button class="mood-btn" data-mood="名物"><span class="em">🦈</span>気仙沼名物を試したい</button>
-    <button class="mood-btn" data-mood="がっつり"><span class="em">💪</span>がっつり食べたい</button>
-    <button class="mood-btn" data-mood="くつろぎ"><span class="em">🍵</span>ゆっくりくつろぎたい</button>
-    <button class="mood-btn" data-mood="贅沢"><span class="em">✨</span>贅沢な気分</button>
-    <button class="mood-btn" data-mood="お酒"><span class="em">🍶</span>お酒を楽しみたい</button>
-    <button class="mood-btn" data-mood="リーズナブル"><span class="em">👛</span>お財布にやさしく</button>
-    <button class="mood-btn" data-mood="手軽"><span class="em">⚡</span>手軽にサクッと</button>
+<main>
+
+  <!-- APIキー設定 -->
+  <div class="card key-card">
+    <button class="key-toggle" onclick="toggleKey()">
+      🔑 <span>Claude APIキー設定</span>
+      <span id="keyBadge" class="key-status-badge badge-ng">未設定</span>
+    </button>
+    <div class="key-body" id="keyBody">
+      <p class="key-note">
+        ⚠️ APIキーはこのブラウザの中だけに保存されます。他の人には見えません。<br>
+        公用PCを使う場合は、使い終わったら「削除」ボタンを押してください。<br>
+        APIキーは Anthropic の管理サイト（<strong>console.anthropic.com</strong>）で取得できます。
+      </p>
+      <label class="form-label">APIキー</label>
+      <div class="input-row">
+        <input type="password" id="keyInput" placeholder="sk-ant-..." />
+        <button class="btn-small btn-save"   onclick="saveKey()">保存</button>
+        <button class="btn-small btn-delete" onclick="deleteKey()">削除</button>
+      </div>
+    </div>
   </div>
-  <button class="search-btn" id="searchBtn" disabled onclick="doSearch()">
-    ぴったりのお店を探す 🔍
-  </button>
-</div>
 
-<!-- ===== 結果 ===== -->
-<div class="results" id="results">
-  <div class="results-title" id="resultsTitle"></div>
-  <div id="shopList"></div>
-</div>
+  <!-- 企業名入力 -->
+  <div class="card form-card">
+    <h2>🏭 分析したい企業名を入力してください</h2>
+    <div class="company-row">
+      <input type="text" id="companyInput"
+             placeholder="例：ソフトバンク株式会社、任天堂株式会社 など"
+             onkeydown="if(event.key==='Enter') analyze()" />
+      <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">
+        分析する
+      </button>
+    </div>
+  </div>
 
-<p class="disclaimer">※ お店情報は参考です。ご来店前に最新情報をご確認ください。</p>
+  <!-- エラー表示 -->
+  <div class="error-box" id="errorBox"></div>
+
+  <!-- 読み込み中 -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p class="loading-text">AIが分析中です...</p>
+    <p class="loading-sub">企業情報・補助金・営業トークを作成しています（20〜30秒ほどかかります）</p>
+  </div>
+
+  <!-- 分析結果 -->
+  <div class="results" id="results">
+
+    <!-- スコア -->
+    <div class="card score-card">
+      <div class="score-inner">
+        <div class="score-circle">
+          <span class="score-num" id="scoreNum">--</span>
+          <span class="score-unit">/ 100点</span>
+        </div>
+        <div class="score-text">
+          <div class="company-label" id="companyLabel"></div>
+          <div class="score-summary" id="scoreSummary"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 相性の内容 -->
+    <div class="card">
+      <div class="sec-label">🤝 相性の内容</div>
+      <p class="compat-text" id="compatText"></p>
+    </div>
+
+    <!-- メリット・デメリット -->
+    <div class="card">
+      <div class="sec-label">📍 立地のメリット・デメリット</div>
+      <div class="merit-grid">
+        <div class="merit-col pro">
+          <h3>✅ メリット</h3>
+          <ul class="merit-list" id="meritList"></ul>
+        </div>
+        <div class="merit-col con">
+          <h3>⚠️ デメリット</h3>
+          <ul class="merit-list" id="demeritList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 補助金 -->
+    <div class="card">
+      <div class="sec-label">💰 活用できる補助金・優遇制度</div>
+      <ul class="subsidy-list" id="subsidyList"></ul>
+    </div>
+
+    <!-- イノベーション性 -->
+    <div class="card">
+      <div class="sec-label">💡 地元企業とのイノベーション性</div>
+      <div class="innovation-box" id="innovationText"></div>
+    </div>
+
+    <!-- 営業トーク -->
+    <div class="card">
+      <div class="sec-label">💬 営業トークの例</div>
+      <div class="sales-box">
+        <button class="copy-btn" id="copyBtn" onclick="copySalesTalk()">コピー</button>
+        <p id="salesTalkText" style="padding-right:4.5rem;"></p>
+      </div>
+    </div>
+
+  </div><!-- /results -->
+
+</main>
+
+<footer>
+  ※ 本ツールは Claude AI（Anthropic）による分析結果です。<br>
+  補助金の詳細・最新情報は必ず担当部署または関係機関にご確認ください。
+</footer>
 
 <script>
-const SHOPS = [
-  {
-    name: "海の市 食堂",
-    emoji: "🐟",
-    genre: "海鮮定食・丼",
-    desc: "気仙沼漁港から直送の新鮮な魚介を使った定食・海鮮丼が揃う人気食堂。地元民にも観光客にも愛されるお店です。",
-    recommend: "おすすめ: メカジキの漬け丼、カツオたたき定食",
-    price: "¥800〜1,500",
-    addr: "気仙沼市魚市場前",
-    tags: ["海の幸", "名物", "手軽", "リーズナブル"]
-  },
-  {
-    name: "ふかひれ料理 鮪立",
-    emoji: "🦈",
-    genre: "ふかひれ専門",
-    desc: "国内屈指のふかひれ産地・気仙沼で本格ふかひれ料理を提供。コラーゲンたっぷりのスープと姿煮が絶品です。",
-    recommend: "おすすめ: ふかひれスープ、ふかひれ姿煮定食",
-    price: "¥2,000〜8,000",
-    addr: "気仙沼市内",
-    tags: ["海の幸", "名物", "贅沢"]
-  },
-  {
-    name: "磯料理 浜の家",
-    emoji: "🦪",
-    genre: "海鮮鍋・磯料理",
-    desc: "三陸の豊かな海の幸を使った磯料理の名店。旬の魚介をゆっくり堪能できる落ち着いた雰囲気が人気。",
-    recommend: "おすすめ: 海鮮鍋、ホヤの刺身盛り合わせ",
-    price: "¥2,500〜5,000",
-    addr: "気仙沼市唐桑町",
-    tags: ["海の幸", "くつろぎ", "贅沢", "お酒"]
-  },
-  {
-    name: "気仙沼ラーメン 喜楽",
-    emoji: "🍜",
-    genre: "ラーメン",
-    desc: "気仙沼名物・魚介だしのラーメン専門店。濃厚な煮干しと魚のうまみが溶け込んだスープが体を温めます。",
-    recommend: "おすすめ: 気仙沼ラーメン、チャーシュー麺",
-    price: "¥700〜1,200",
-    addr: "気仙沼市中心部",
-    tags: ["がっつり", "名物", "リーズナブル", "手軽"]
-  },
-  {
-    name: "ホルモン食堂 三陸亭",
-    emoji: "🥩",
-    genre: "気仙沼ホルモン",
-    desc: "気仙沼B級グルメの雄・ホルモン料理の専門店。モツのうまみたっぷりで、地元の人にも愛されるお店。",
-    recommend: "おすすめ: ホルモン定食、ホルモン炒め",
-    price: "¥800〜2,000",
-    addr: "気仙沼市内",
-    tags: ["がっつり", "名物", "お酒", "リーズナブル"]
-  },
-  {
-    name: "かき小屋 唐桑半島",
-    emoji: "🦪",
-    genre: "かき料理",
-    desc: "唐桑産の新鮮な牡蠣をその場で豪快に焼いて食べる体験型グルメ。旬の季節は格別の甘みが楽しめます。",
-    recommend: "おすすめ: 焼きがき、かきフライ定食",
-    price: "¥1,000〜2,500",
-    addr: "気仙沼市唐桑町",
-    tags: ["海の幸", "名物", "手軽"]
-  },
-  {
-    name: "割烹 若潮",
-    emoji: "🍱",
-    genre: "日本料理・懐石",
-    desc: "旬の食材を活かした上品な懐石料理。記念日や特別な食事に、三陸の海の幸を丁寧な料理で味わえます。",
-    recommend: "おすすめ: 三陸懐石コース、特選刺身盛り合わせ",
-    price: "¥5,000〜15,000",
-    addr: "気仙沼市内",
-    tags: ["贅沢", "くつろぎ", "海の幸"]
-  },
-  {
-    name: "居酒屋 港屋",
-    emoji: "🍶",
-    genre: "居酒屋・海鮮",
-    desc: "地元漁師も集う活気ある居酒屋。新鮮な刺身と三陸の地酒で、にぎやかな夜を過ごせます。",
-    recommend: "おすすめ: 刺身盛り合わせ、三陸地酒飲み比べ",
-    price: "¥1,500〜4,000",
-    addr: "気仙沼市内",
-    tags: ["お酒", "海の幸", "がっつり"]
-  },
-  {
-    name: "海辺のカフェ 灯台",
-    emoji: "☕",
-    genre: "カフェ・スイーツ",
-    desc: "海を望む絶景カフェ。気仙沼の景色を眺めながらコーヒーやスイーツでのんびり過ごせる癒しの空間。",
-    recommend: "おすすめ: 三陸ミルクのソフトクリーム、海鮮ガレット",
-    price: "¥500〜1,200",
-    addr: "気仙沼市大島",
-    tags: ["くつろぎ", "手軽", "リーズナブル"]
-  },
-  {
-    name: "海鮮丼 潮風",
-    emoji: "🍚",
-    genre: "海鮮丼専門",
-    desc: "その日の水揚げから選ぶ新鮮な海鮮丼の専門店。ボリューム満点で、観光の合間にもぴったりな一軒。",
-    recommend: "おすすめ: 三陸海鮮丼、サーモン＆いくら丼",
-    price: "¥1,200〜2,500",
-    addr: "気仙沼市魚市場周辺",
-    tags: ["海の幸", "がっつり", "手軽", "名物"]
-  }
-];
-
-const selected = new Set();
-
-document.getElementById('moodGrid').addEventListener('click', e => {
-  const btn = e.target.closest('.mood-btn');
-  if (!btn) return;
-  const mood = btn.dataset.mood;
-  if (selected.has(mood)) {
-    selected.delete(mood);
-    btn.classList.remove('selected');
+/* ===========================
+   APIキー管理
+=========================== */
+function loadKey() {
+  var k = localStorage.getItem('_kesen_api_key') || '';
+  document.getElementById('keyInput').value = k;
+  var badge = document.getElementById('keyBadge');
+  if (k) {
+    badge.textContent = '設定済み';
+    badge.className = 'key-status-badge badge-ok';
   } else {
-    selected.add(mood);
-    btn.classList.add('selected');
+    badge.textContent = '未設定';
+    badge.className = 'key-status-badge badge-ng';
   }
-  document.getElementById('searchBtn').disabled = selected.size === 0;
-});
+  return k;
+}
 
-function doSearch() {
-  const moods = [...selected];
+function saveKey() {
+  var k = document.getElementById('keyInput').value.trim();
+  if (!k) { alert('APIキーを入力してください。'); return; }
+  localStorage.setItem('_kesen_api_key', k);
+  loadKey();
+  document.getElementById('keyBody').classList.remove('open');
+  alert('APIキーを保存しました！');
+}
 
-  const ranked = SHOPS
-    .map(s => ({ ...s, score: s.tags.filter(t => moods.includes(t)).length }))
-    .sort((a, b) => b.score - a.score);
+function deleteKey() {
+  if (!confirm('保存しているAPIキーを削除しますか？')) return;
+  localStorage.removeItem('_kesen_api_key');
+  document.getElementById('keyInput').value = '';
+  loadKey();
+}
 
-  const top3 = ranked.slice(0, 3);
+function toggleKey() {
+  document.getElementById('keyBody').classList.toggle('open');
+}
 
-  const RANK = [
-    { label: '1位', icon: '🥇', cls: 'rank-1' },
-    { label: '2位', icon: '🥈', cls: 'rank-2' },
-    { label: '3位', icon: '🥉', cls: 'rank-3' },
-  ];
+loadKey();
 
-  document.getElementById('resultsTitle').textContent =
-    `「${moods.join('・')}」の気分にオススメ TOP 3 🎉`;
+/* ===========================
+   UI ヘルパー
+=========================== */
+function showError(msg) {
+  var el = document.getElementById('errorBox');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearError() {
+  document.getElementById('errorBox').classList.remove('show');
+}
+function setLoading(on) {
+  document.getElementById('loading').classList.toggle('show', on);
+  document.getElementById('analyzeBtn').disabled = on;
+}
+function showResults(on) {
+  document.getElementById('results').classList.toggle('show', on);
+}
 
-  document.getElementById('shopList').innerHTML = top3.map((shop, i) => {
-    const hitTags  = shop.tags.filter(t =>  moods.includes(t));
-    const missTags = shop.tags.filter(t => !moods.includes(t));
-    const tagsHtml = [
-      ...hitTags.map(t  => `<span class="tag hit">${t}</span>`),
-      ...missTags.map(t => `<span class="tag">${t}</span>`),
-    ].join('');
+/* ===========================
+   分析メイン処理
+=========================== */
+async function analyze() {
+  clearError();
+  showResults(false);
 
-    return `
-      <div class="shop-card">
-        <div class="rank-badge ${RANK[i].cls}">
-          <span>${RANK[i].icon}</span>
-          <span class="rank-num">${RANK[i].label}</span>
-        </div>
-        <div class="shop-info">
-          <div class="shop-header">
-            <span class="shop-name">${shop.emoji} ${shop.name}</span>
-            <span class="shop-genre">${shop.genre}</span>
-          </div>
-          <div class="shop-desc">${shop.desc}</div>
-          <div class="shop-recommend">${shop.recommend}</div>
-          <div class="shop-meta">
-            <span>💰 ${shop.price}</span>
-            <span>📍 ${shop.addr}</span>
-          </div>
-          <div class="match-tags">${tagsHtml}</div>
-        </div>
-      </div>`;
+  var company = document.getElementById('companyInput').value.trim();
+  var apiKey  = loadKey();
+
+  if (!company) {
+    showError('企業名を入力してください。');
+    return;
+  }
+  if (!apiKey) {
+    showError('APIキーが設定されていません。画面上部の「🔑 Claude APIキー設定」を開いて保存してください。');
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-5',
+        max_tokens: 2048,
+        system: buildSystem(),
+        messages: [{ role: 'user', content: buildPrompt(company) }]
+      })
+    });
+
+    if (!response.ok) {
+      var errMsg = 'APIエラー（' + response.status + '）';
+      try {
+        var errData = await response.json();
+        if (errData.error && errData.error.message) errMsg = errData.error.message;
+      } catch (_) {}
+      if (response.status === 401) errMsg = 'APIキーが正しくありません。設定を確認してください。';
+      if (response.status === 429) errMsg = 'リクエストが多すぎます。少し待ってからもう一度お試しください。';
+      throw new Error(errMsg);
+    }
+
+    var data = await response.json();
+    var text = (data.content && data.content[0] && data.content[0].text) || '';
+
+    var match = text.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('AIの回答からデータを取り出せませんでした。もう一度お試しください。');
+
+    var result;
+    try { result = JSON.parse(match[0]); }
+    catch (e) { throw new Error('データの解析に失敗しました。もう一度お試しください。'); }
+
+    renderResults(company, result);
+
+  } catch (err) {
+    showError('エラーが発生しました: ' + err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+/* ===========================
+   Claude へのプロンプト
+=========================== */
+function buildSystem() {
+  return 'あなたは気仙沼市の企業誘致専門AIアシスタントです。\n' +
+    '指定された企業と気仙沼市の相性を詳しく分析し、必ず下記のJSON形式のみで回答してください。\n' +
+    'マークダウン・コードブロック・説明文は一切不要です。JSONデータだけを出力してください。\n\n' +
+    '【気仙沼市の特徴】\n' +
+    '- 宮城県北東部・三陸海岸に位置する港町（人口約6万人）\n' +
+    '- 水産業（ふかひれ・カツオ・サンマ・カキ・ホヤ）が基幹産業\n' +
+    '- 東日本大震災からの復興を継続中、産業誘致に積極的\n' +
+    '- 豊かな自然・新鮮な海産物・低い地価・低い生活コスト\n' +
+    '- 三陸沿岸道路の整備によりアクセス向上（気仙沼IC利用可）\n' +
+    '- 気仙沼市立病院・学校などインフラ整備済み\n\n' +
+    '【主な補助金・優遇制度】\n' +
+    '- 立地奨励金（設備投資額の最大15%）\n' +
+    '- 雇用奨励金（新規雇用1人あたり最大50万円）\n' +
+    '- 固定資産税の免除（最長5年間）\n' +
+    '- サテライトオフィス開設補助金（整備費・賃料補助）\n' +
+    '- 再生可能エネルギー・水産業・脱炭素関連の国の補助金\n' +
+    '- 宮城県の企業立地促進制度\n\n' +
+    '【出力JSONスキーマ】\n' +
+    '{\n' +
+    '  "score": 0から100の整数,\n' +
+    '  "summary": "相性を表すキャッチフレーズ（〜30文字）",\n' +
+    '  "compatibility": "相性の詳細説明（100〜200文字）",\n' +
+    '  "merits": ["メリット1", "メリット2", "メリット3"],\n' +
+    '  "demerits": ["デメリット1", "デメリット2"],\n' +
+    '  "subsidies": [\n' +
+    '    {"name": "補助金・制度の名前", "amount": "金額や割合の目安", "desc": "簡単な説明"}\n' +
+    '  ],\n' +
+    '  "innovation": "地元企業とのイノベーション可能性（80〜150文字）",\n' +
+    '  "salesTalk": "実際に使える営業トーク例（200〜300文字、担当者目線で具体的に）"\n' +
+    '}';
+}
+
+function buildPrompt(company) {
+  return '次の企業について、気仙沼市への誘致可能性を詳しく分析し、JSONのみで回答してください。\n\n' +
+    '企業名: ' + company + '\n\n' +
+    '以下の項目を含めてください：\n' +
+    '- score: 気仙沼市との相性スコア（0〜100の整数）\n' +
+    '- summary: 相性を一言で表すキャッチフレーズ\n' +
+    '- compatibility: なぜこのスコアになるか、企業の事業と気仙沼市の特性をどう結びつけられるかの説明\n' +
+    '- merits: 気仙沼市に立地する企業側のメリット（3〜5項目）\n' +
+    '- demerits: 立地のデメリットや課題（2〜3項目）\n' +
+    '- subsidies: この企業が活用できそうな補助金・優遇制度（2〜4件）\n' +
+    '- innovation: 地元の水産・観光・脱炭素などの産業との連携・イノベーション可能性\n' +
+    '- salesTalk: 実際の営業訪問で使えるリアルな話法（担当者が言いやすい自然な日本語で）';
+}
+
+/* ===========================
+   結果の表示
+=========================== */
+function renderResults(company, r) {
+  var score = Math.max(0, Math.min(100, Number(r.score) || 0));
+  var numEl = document.getElementById('scoreNum');
+  numEl.textContent = score;
+  numEl.className = 'score-num ' + scoreColorClass(score);
+
+  document.getElementById('companyLabel').textContent = company + '  ×  気仙沼市';
+  document.getElementById('scoreSummary').textContent = r.summary || '';
+
+  document.getElementById('compatText').textContent = r.compatibility || '';
+
+  var ml = document.getElementById('meritList');
+  ml.innerHTML = (r.merits || []).map(function(m) {
+    return '<li><span class="merit-icon">✅</span>' + esc(m) + '</li>';
   }).join('');
 
-  const resultDiv = document.getElementById('results');
-  resultDiv.classList.add('show');
-  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var dl = document.getElementById('demeritList');
+  dl.innerHTML = (r.demerits || []).map(function(d) {
+    return '<li><span class="merit-icon">⚠️</span>' + esc(d) + '</li>';
+  }).join('');
+
+  var sl = document.getElementById('subsidyList');
+  sl.innerHTML = (r.subsidies || []).map(function(s) {
+    return '<li class="subsidy-item">' +
+      '<div class="sub-name">💰 ' + esc(s.name || '') + '</div>' +
+      '<div class="sub-amount">' + esc(s.amount || '') + '</div>' +
+      '<div class="sub-desc">' + esc(s.desc || '') + '</div>' +
+      '</li>';
+  }).join('');
+
+  document.getElementById('innovationText').textContent = r.innovation || '';
+  document.getElementById('salesTalkText').textContent = r.salesTalk || '';
+
+  var copyBtn = document.getElementById('copyBtn');
+  copyBtn.textContent = 'コピー';
+  copyBtn.className = 'copy-btn';
+
+  showResults(true);
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function scoreColorClass(score) {
+  if (score >= 80) return 'score-s';
+  if (score >= 60) return 'score-a';
+  if (score >= 40) return 'score-b';
+  return 'score-c';
+}
+
+function esc(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/* ===========================
+   営業トークをコピー
+=========================== */
+function copySalesTalk() {
+  var text = document.getElementById('salesTalkText').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = 'コピー完了！';
+    btn.className = 'copy-btn copied';
+    setTimeout(function() {
+      btn.textContent = 'コピー';
+      btn.className = 'copy-btn';
+    }, 2000);
+  }).catch(function() {
+    alert('コピーに失敗しました。テキストを手動でコピーしてください。');
+  });
 }
 </script>
+
 </body>
 </html>
