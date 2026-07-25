@@ -34,117 +34,57 @@ header {
   display: flex; align-items: center; gap: 1rem;
   box-shadow: 0 3px 12px rgba(0,0,0,.28);
 }
-.hdr-icon {
-  width: 46px; height: 46px;
-  background: rgba(255,255,255,.15);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.55rem; flex-shrink: 0;
-}
+.hdr-icon { width: 46px; height: 46px; background: rgba(255,255,255,.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.55rem; flex-shrink: 0; }
 .hdr-text h1 { color: #fff; font-size: clamp(.95rem, 4vw, 1.3rem); font-weight: 800; letter-spacing: .04em; }
 .hdr-text p  { color: #a8c8e8; font-size: .72rem; margin-top: .1rem; }
 
 main { max-width: 860px; margin: 0 auto; padding: 1.4rem 1rem 3rem; }
 
-.card {
-  background: var(--card);
-  border-radius: .9rem;
-  padding: 1.3rem 1.5rem;
-  margin-bottom: .9rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,.07);
-}
+.card { background: var(--card); border-radius: .9rem; padding: 1.3rem 1.5rem; margin-bottom: .9rem; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
 
-/* APIキー */
 .key-card { border-left: 4px solid var(--gold); }
-.key-toggle {
-  background: none; border: none; color: var(--ocean);
-  font-family: inherit; font-size: .88rem; font-weight: 700;
-  cursor: pointer; display: flex; align-items: center; gap: .5rem;
-  padding: 0; width: 100%; text-align: left;
-}
-.badge {
-  display: inline-block; padding: .15rem .55rem;
-  border-radius: 999px; font-size: .7rem; font-weight: 700;
-}
+.key-toggle { background: none; border: none; color: var(--ocean); font-family: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: .5rem; padding: 0; width: 100%; text-align: left; }
+.badge { display: inline-block; padding: .15rem .55rem; border-radius: 999px; font-size: .7rem; font-weight: 700; }
 .badge-ok { background: #d5f5e3; color: #1e8449; }
 .badge-ng { background: #fadbd8; color: #922b21; }
 .key-body { display: none; margin-top: 1rem; }
 .key-body.open { display: block; }
-.key-note {
-  font-size: .75rem; color: #556; line-height: 1.65;
-  background: #fffbec; padding: .55rem .75rem;
-  border-radius: .45rem; border: 1px solid #f0c820;
-  margin-bottom: .8rem;
-}
+.key-note { font-size: .75rem; color: #556; line-height: 1.65; background: #fffbec; padding: .55rem .75rem; border-radius: .45rem; border: 1px solid #f0c820; margin-bottom: .8rem; }
 .form-label { display: block; font-size: .78rem; font-weight: 700; color: var(--navy); margin-bottom: .35rem; }
 .input-row { display: flex; gap: .55rem; }
 
-input[type="text"], input[type="password"] {
-  width: 100%; padding: .72rem 1rem;
-  border: 2px solid #c8d8ea; border-radius: .55rem;
-  font-family: inherit; font-size: .95rem; color: var(--text);
-  outline: none; transition: border-color .15s;
-}
+input[type="text"], input[type="password"] { width: 100%; padding: .72rem 1rem; border: 2px solid #c8d8ea; border-radius: .55rem; font-family: inherit; font-size: .95rem; color: var(--text); outline: none; transition: border-color .15s; }
 input:focus { border-color: var(--ocean); }
 
-.btn-s {
-  padding: 0 1.1rem; border: none; border-radius: .55rem;
-  font-family: inherit; font-size: .82rem; font-weight: 700;
-  cursor: pointer; white-space: nowrap; transition: background .15s;
-}
-.btn-save   { background: var(--ocean); color: #fff; }
-.btn-del    { background: #c0392b;      color: #fff; }
+.btn-s { padding: 0 1.1rem; border: none; border-radius: .55rem; font-family: inherit; font-size: .82rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background .15s; }
+.btn-save { background: var(--ocean); color: #fff; }
+.btn-del  { background: #c0392b; color: #fff; }
 .btn-save:hover { background: var(--navy); }
 .btn-del:hover  { background: #962d22; }
 
-/* フォーム */
 .form-card h2 { font-size: 1rem; color: var(--navy); margin-bottom: .9rem; display: flex; align-items: center; gap: .4rem; }
 .company-row { display: flex; gap: .7rem; align-items: stretch; }
 .company-row input { flex: 1; }
-.btn-analyze {
-  padding: 0 1.6rem;
-  background: linear-gradient(135deg, var(--orange) 0%, #b85000 100%);
-  color: #fff; border: none; border-radius: .6rem;
-  font-family: inherit; font-size: 1rem; font-weight: 800;
-  cursor: pointer; white-space: nowrap;
-  box-shadow: 0 3px 10px rgba(224,112,32,.35);
-  transition: all .18s;
-}
+.btn-analyze { padding: 0 1.6rem; background: linear-gradient(135deg, var(--orange) 0%, #b85000 100%); color: #fff; border: none; border-radius: .6rem; font-family: inherit; font-size: 1rem; font-weight: 800; cursor: pointer; white-space: nowrap; box-shadow: 0 3px 10px rgba(224,112,32,.35); transition: all .18s; }
 .btn-analyze:hover    { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(224,112,32,.4); }
 .btn-analyze:disabled { background: #aaa; box-shadow: none; cursor: default; transform: none; }
 
-/* エラー */
-.error-box {
-  background: #fff0f0; border-left: 4px solid var(--red);
-  padding: .9rem 1.1rem; border-radius: 0 .65rem .65rem 0;
-  color: #922; font-size: .86rem; line-height: 1.65;
-  margin-bottom: .9rem; display: none;
-}
+.error-box { background: #fff0f0; border-left: 4px solid var(--red); padding: .9rem 1.1rem; border-radius: 0 .65rem .65rem 0; color: #922; font-size: .86rem; line-height: 1.65; margin-bottom: .9rem; display: none; }
 .error-box.show { display: block; }
 
-/* ローディング */
 .loading { text-align: center; padding: 2.8rem 1rem; display: none; }
 .loading.show { display: block; }
-.spinner {
-  width: 50px; height: 50px;
-  border: 4px solid #c8dcea; border-top-color: var(--ocean);
-  border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto .9rem;
-}
+.spinner { width: 50px; height: 50px; border: 4px solid #c8dcea; border-top-color: var(--ocean); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto .9rem; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-text { color: var(--ocean); font-weight: 700; font-size: .92rem; }
 .loading-sub  { color: #778; font-size: .76rem; margin-top: .3rem; }
 
-/* 結果 */
 .results { display: none; }
 .results.show { display: block; }
 
 .score-card { background: linear-gradient(135deg, var(--navy) 0%, var(--ocean) 100%); color: #fff; }
 .score-inner { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-.score-circle {
-  width: 110px; height: 110px; border-radius: 50%;
-  background: rgba(255,255,255,.12); border: 4px solid rgba(255,255,255,.35);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
-}
+.score-circle { width: 110px; height: 110px; border-radius: 50%; background: rgba(255,255,255,.12); border: 4px solid rgba(255,255,255,.35); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
 .score-num { font-size: 2.4rem; font-weight: 900; line-height: 1; }
 .score-s { color: #5dce80; }
 .score-a { color: #5bc8ee; }
@@ -154,10 +94,7 @@ input:focus { border-color: var(--ocean); }
 .company-label { font-size: clamp(.82rem, 3vw, 1rem); font-weight: 700; opacity: .8; margin-bottom: .3rem; }
 .score-summary { font-size: clamp(.95rem, 4vw, 1.25rem); font-weight: 800; line-height: 1.45; }
 
-.sec-label {
-  font-size: .72rem; font-weight: 800; letter-spacing: .12em;
-  color: var(--ocean); margin-bottom: .85rem; display: flex; align-items: center; gap: .4rem;
-}
+.sec-label { font-size: .72rem; font-weight: 800; letter-spacing: .12em; color: var(--ocean); margin-bottom: .85rem; display: flex; align-items: center; gap: .4rem; }
 .compat-text { font-size: .88rem; line-height: 1.85; color: #334; }
 
 .merit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -200,27 +137,26 @@ footer { text-align: center; padding: 1.2rem 1rem 2.5rem; color: #9aa; font-size
 
 <main>
 
-  <!-- APIキー -->
   <div class="card key-card">
     <button class="key-toggle" onclick="toggleKey()">
-      🔑 <span>Claude APIキー設定</span>
+      🔑 <span>Google AI Studio APIキー設定</span>
       <span id="keyBadge" class="badge badge-ng">未設定</span>
     </button>
     <div class="key-body" id="keyBody">
       <p class="key-note">
         ⚠️ APIキーはこのブラウザの中だけに保存されます。他の人には見えません。<br>
-        公用PCを使う場合は、使い終わったら「削除」を押してください。
+        公用PCを使う場合は、使い終わったら「削除」を押してください。<br>
+        キーは <strong>aistudio.google.com/apikey</strong> で取得・確認できます。
       </p>
       <label class="form-label">APIキー</label>
       <div class="input-row">
-        <input type="password" id="keyInput" placeholder="sk-ant-..." />
+        <input type="password" id="keyInput" placeholder="AIza..." />
         <button class="btn-s btn-save" onclick="saveKey()">保存</button>
         <button class="btn-s btn-del"  onclick="deleteKey()">削除</button>
       </div>
     </div>
   </div>
 
-  <!-- 企業名入力 -->
   <div class="card form-card">
     <h2>🏭 分析したい企業名を入力してください</h2>
     <div class="company-row">
@@ -296,32 +232,32 @@ footer { text-align: center; padding: 1.2rem 1rem 2.5rem; color: #9aa; font-size
 </main>
 
 <footer>
-  ※ 本ツールは Claude AI（Anthropic）による分析結果です。<br>
+  ※ 本ツールは Google Gemini AI による分析結果です。<br>
   補助金の詳細・最新情報は必ず担当部署または関係機関にご確認ください。
 </footer>
 
 <script>
-var WORKER_URL = 'https://wwwww.bokumarkun0428.workers.dev/';
+var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 function loadKey() {
-  var k = localStorage.getItem('_kesen_key') || '';
+  var k = localStorage.getItem('_kesen_gkey') || '';
   document.getElementById('keyInput').value = k;
   var badge = document.getElementById('keyBadge');
   if (k) { badge.textContent = '設定済み'; badge.className = 'badge badge-ok'; }
-  else    { badge.textContent = '未設定';   badge.className = 'badge badge-ng'; }
+  else   { badge.textContent = '未設定';   badge.className = 'badge badge-ng'; }
   return k;
 }
 function saveKey() {
   var k = document.getElementById('keyInput').value.trim();
   if (!k) { alert('APIキーを入力してください。'); return; }
-  localStorage.setItem('_kesen_key', k);
+  localStorage.setItem('_kesen_gkey', k);
   loadKey();
   document.getElementById('keyBody').classList.remove('open');
   alert('APIキーを保存しました！');
 }
 function deleteKey() {
   if (!confirm('APIキーを削除しますか？')) return;
-  localStorage.removeItem('_kesen_key');
+  localStorage.removeItem('_kesen_gkey');
   document.getElementById('keyInput').value = '';
   loadKey();
 }
@@ -342,22 +278,18 @@ async function analyze() {
   var apiKey  = loadKey();
 
   if (!company) { showError('企業名を入力してください。'); return; }
-  if (!apiKey)  { showError('APIキーが設定されていません。上の「🔑 Claude APIキー設定」を開いて保存してください。'); return; }
+  if (!apiKey)  { showError('APIキーが設定されていません。上の「🔑 Google AI Studio APIキー設定」を開いて保存してください。'); return; }
 
   setLoading(true);
 
   try {
-    var response = await fetch(WORKER_URL, {
+    var response = await fetch(GEMINI_URL + '?key=' + encodeURIComponent(apiKey), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-opus-5',
-        max_tokens: 2048,
-        system: buildSystem(),
-        messages: [{ role: 'user', content: buildPrompt(company) }]
+        systemInstruction: { parts: [{ text: buildSystem() }] },
+        contents: [{ role: 'user', parts: [{ text: buildPrompt(company) }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
       })
     });
 
@@ -367,18 +299,23 @@ async function analyze() {
         var errData = await response.json();
         if (errData.error && errData.error.message) errMsg = errData.error.message;
       } catch (_) {}
-      if (response.status === 401) errMsg = 'APIキーが正しくありません。設定を確認してください。';
+      if (response.status === 400) errMsg = 'APIキーが正しくありません。設定を確認してください。';
       if (response.status === 429) errMsg = 'リクエストが多すぎます。少し待ってからもう一度お試しください。';
       throw new Error(errMsg);
     }
 
     var data = await response.json();
-    var text = (data.content && data.content[0] && data.content[0].text) || '';
+    var text = '';
+    try { text = data.candidates[0].content.parts[0].text; } catch(_) {}
+    if (!text) throw new Error('AIの回答が取得できませんでした。もう一度お試しください。');
+
     var match = text.match(/\{[\s\S]*\}/);
     if (!match) throw new Error('AIの回答からデータを取り出せませんでした。もう一度お試しください。');
+
     var result;
     try { result = JSON.parse(match[0]); }
     catch (e) { throw new Error('データの解析に失敗しました。もう一度お試しください。'); }
+
     renderResults(company, result);
 
   } catch (err) {
